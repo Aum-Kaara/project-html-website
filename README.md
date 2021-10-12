@@ -1,20 +1,55 @@
-# This repo is no longer used. Please see  https://github.com/microsoft/devops-project-samples for samples of Azure DevOps Project
+## Deploy Static HTML Website Azure Web App
+This Repo gives you an idea of how to deploy static html website using Azure Devops
 
 | Language | Platform | Author |
 | -------- | --------|--------|
-| HTML |  Azure Web App, Virtual Machine| |
+| HTML |  Azure Web App, Virtual Machine| Mohit Gupta
 
-# Sample HTML website 
+## Create Web App 
+Create Azure Web App on Azure Portal 
 
-Sample HTML/CSS web app that you can deploy to Azure. 
+![N|Solid](media/CreateWebApp.png)
 
-## License
+Choose service plan
 
-See [LICENSE](LICENSE).
+![N|Solid](media/ChoosePlan.png)
 
+## Check-in Source Code at GitHub
 
-## Contributing
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
-contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+select any Sample HTML/CSS web app . check-in code on githib 
+
+## Create Azure DevOps Pipeline
+
+This pipeline publish artifacts to release pipeline 
+
+```
+# HTML
+# Archive your static HTML project and save it with the build record.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(build.sourcesDirectory)'
+    includeRootFolder: false
+- task: PublishBuildArtifacts@1
+
+```
+
+## Create Azure DevOps Release Pipeline
+
+![N|Solid](media/Release.png)
+
+![N|Solid](media/Release2.png)
+
+## Deploy App
+
+Run Pipeline and Deploy App to Azure 
 
